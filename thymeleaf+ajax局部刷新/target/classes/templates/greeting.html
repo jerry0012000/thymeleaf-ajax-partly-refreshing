@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>thymeleaf+ajax局部刷新</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script>
+        function refresh()
+        {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("fresh").innerHTML=xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET","/refresh.txt",true);
+            xmlhttp.send();
+        }
+        function refreshBack()
+        {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("fresh").innerHTML=xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET","/refreshBack.txt",true);
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+<p id="fresh">这是我想刷新的This is what I want to refresh</p>
+<button type="button" onclick="refresh()">修改内容Edit it</button>
+<button type="button" onclick="refreshBack()">刷回去！Refresh back!</button>
+<p id="notFresh">这是我不想刷新的This is what I don't want to refresh</p>
+</body>
+</html>
